@@ -2,144 +2,106 @@ package utils.linkedlist;
 
 import java.util.NoSuchElementException;
 
-public class List {
-    ListItem headNode = null;
+public class List<T> {
+    private ListItem<T> headNode;
+    private int size;
 
-    public List()
-    {
-        headNode = new ListItem();
+    public List() {
+        headNode = null;
+        size = 0;
     }
 
-    public void appendToList(Object data)
-    {
-        ListItem cur = headNode;
-        ListItem newItem = new ListItem();
-
-        while (cur.link != null)
-        {
-            cur = cur.link;
-        }
-
+    public void appendToList(T data) {
+        ListItem<T> newItem = new ListItem<>();
         newItem.data = data;
 
-        cur.link = newItem;
+        if (headNode == null) {
+            headNode = newItem;
+        } else {
+            ListItem<T> cur = headNode;
+            while (cur.link != null) {
+                cur = cur.link;
+            }
+            cur.link = newItem;
+        }
+        size++;
     }
 
-    public void prependToList(Object data)
-    {
-        ListItem pre = headNode;
-        ListItem cur = headNode.link;
-        ListItem newItem = new ListItem();
-
-        pre.link = newItem;
-        newItem.link = cur;
-
+    public void prependToList(T data) {
+        ListItem<T> newItem = new ListItem<>();
         newItem.data = data;
+        newItem.link = headNode;
+        headNode = newItem;
+        size++;
     }
 
-    public void insertInList(int index, Object data)
-    {
-        ListItem pre = null;
-        ListItem cur = headNode;
-        ListItem newItem = new ListItem();
-
-        int i = 0;
-
-        while (cur.link != null)
-        {
-            pre = cur;
-            cur = cur.link;
-
-            if (i == index)
-            {
-                pre.link = newItem;
-                newItem.link = cur;
-
-                newItem.data = data;
-
-                return;
-            }
-
-            i++;
-        }
-    }
-
-    public void delete(int index)
-    {
-        ListItem pre = null;
-        ListItem cur = headNode;
-
-        int i = 0;
-
-        while (cur.link != null)
-        {
-            pre = cur;
-            cur = cur.link;
-
-            if (i == index)
-            {
-                pre.link = cur.link;
-                return;
-            }
-
-            i++;
-        }
-    }
-
-    public Object value(int index)
-    {
-        ListItem cur = headNode;
-
-        int i = 0;
-
-        while (cur.link != null)
-        {
-            cur = cur.link;
-
-            if (i == index)
-            {
-                return cur.data;
-            }
-
-            i++;
+    public void insertInList(int index, T data) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("Index " + index + " is out of bounds.");
         }
 
-        return null;
+        ListItem<T> newItem = new ListItem<>();
+        newItem.data = data;
+
+        if (index == 0) {
+            newItem.link = headNode;
+            headNode = newItem;
+        } else {
+            ListItem<T> cur = headNode;
+            for (int i = 0; i < index - 1; i++) {
+                cur = cur.link;
+            }
+            newItem.link = cur.link;
+            cur.link = newItem;
+        }
+        size++;
     }
 
-    public int searchList(Object data)
-    {
-        ListItem cur = headNode.link;
+    public void delete(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index " + index + " is out of bounds.");
+        }
 
-        int i = 0;
+        if (index == 0) {
+            headNode = headNode.link;
+        } else {
+            ListItem<T> cur = headNode;
+            for (int i = 0; i < index - 1; i++) {
+                cur = cur.link;
+            }
+            cur.link = cur.link.link;
+        }
+        size--;
+    }
 
-        while (cur != null)
-        {
-            if (cur.data != null && cur.data.equals(data))
-            {
-                return i;
+    public T value(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index " + index + " is out of bounds.");
+        }
+
+        ListItem<T> cur = headNode;
+        for (int i = 0; i < index; i++) {
+            cur = cur.link;
+        }
+        return cur.data;
+    }
+
+    public int searchList(T data) {
+        ListItem<T> cur = headNode;
+        int index = 0;
+
+        while (cur != null) {
+            if (cur.data != null && cur.data.equals(data)) {
+                return index;
             }
             cur = cur.link;
-
-            i++;
+            index++;
         }
 
         throw new NoSuchElementException("Element '" + data + "' not found in the list.");
     }
 
-    public int size()
-    {
-        ListItem cur = headNode;
-
-        int i = -1;
-
-        while (cur.link != null)
-        {
-            cur = cur.link;
-
-            i++;
-        }
-
-        return i + 1;
+    public int size() {
+        return size;
     }
 }

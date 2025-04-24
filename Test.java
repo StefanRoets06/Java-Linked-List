@@ -2,7 +2,7 @@ import utils.linkedlist.List;
 
 public class Test {
     public static void main(String[] args) {
-        List myList = new List();
+        List<String> myList = new List<>();
         System.out.println("Created a new empty list.");
         System.out.println("Size of the list: " + myList.size());
 
@@ -40,7 +40,7 @@ public class Test {
         } catch (Exception e) {
             System.out.println(e);
         }
-        
+
         myList.delete(1);
         System.out.println("\nDeleted element at index 1.");
         System.out.println("Size of the list: " + myList.size());
@@ -48,5 +48,18 @@ public class Test {
         System.out.println("Value at index 1: " + myList.value(1));
         System.out.println("Value at index 2: " + myList.value(2));
         System.out.println("Value at index 3: " + myList.value(3));
+
+        System.out.println("\nTesting edge cases:");
+        try {
+            myList.value(-1);
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+
+        try {
+            myList.delete(10);
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 }

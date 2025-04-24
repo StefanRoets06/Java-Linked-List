@@ -1,7 +1,7 @@
 package utils.linkedlist;
 
-public class ListItem
+public class ListItem<T>
 {
-    public Object data = null;
-    public ListItem link = null;
+    public T data = null;
+    public ListItem<T> link = null;
 }
