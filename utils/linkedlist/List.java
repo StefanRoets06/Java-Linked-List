@@ -22,14 +22,6 @@ public class List {
 
         newItem.data = data;
 
-        if (cur.index >= 0) {
-            newItem.index = cur.index + 1;
-        }
-        else
-        {
-            newItem.index = 0;
-        }
-
         cur.link = newItem;
     }
 
@@ -43,14 +35,6 @@ public class List {
         newItem.link = cur;
 
         newItem.data = data;
-        newItem.index = 0;
-
-        while (cur != null)
-        {
-            cur.index += 1;
-            pre = cur;
-            cur = cur.link;
-        }
     }
 
     public void insertInList(int index, Object data)
@@ -59,30 +43,24 @@ public class List {
         ListItem cur = headNode;
         ListItem newItem = new ListItem();
 
+        int i = 0;
+
         while (cur.link != null)
         {
             pre = cur;
             cur = cur.link;
 
-            if (cur.index == index)
+            if (i == index)
             {
                 pre.link = newItem;
                 newItem.link = cur;
 
                 newItem.data = data;
-                newItem.index = index;
 
-                cur.index += 1;
-
-                while (cur.link != null)
-                {
-                    pre = cur;
-                    cur = cur.link;
-
-                    cur.index += 1;
-                }
                 return;
             }
+
+            i++;
         }
     }
 
@@ -91,23 +69,20 @@ public class List {
         ListItem pre = null;
         ListItem cur = headNode;
 
+        int i = 0;
+
         while (cur.link != null)
         {
             pre = cur;
             cur = cur.link;
 
-            if (cur.index == index)
+            if (i == index)
             {
                 pre.link = cur.link;
-
-                ListItem temp = cur.link;
-                while (temp != null)
-                {
-                    temp.index -= 1;
-                    temp = temp.link;
-                }
                 return;
             }
+
+            i++;
         }
     }
 
@@ -115,14 +90,18 @@ public class List {
     {
         ListItem cur = headNode;
 
+        int i = 0;
+
         while (cur.link != null)
         {
             cur = cur.link;
 
-            if (cur.index == index)
+            if (i == index)
             {
                 return cur.data;
             }
+
+            i++;
         }
 
         return null;
@@ -132,13 +111,17 @@ public class List {
     {
         ListItem cur = headNode.link;
 
+        int i = 0;
+
         while (cur != null)
         {
             if (cur.data != null && cur.data.equals(data))
             {
-                return cur.index;
+                return i;
             }
             cur = cur.link;
+
+            i++;
         }
 
         throw new NoSuchElementException("Element '" + data + "' not found in the list.");
@@ -148,11 +131,15 @@ public class List {
     {
         ListItem cur = headNode;
 
+        int i = -1;
+
         while (cur.link != null)
         {
             cur = cur.link;
+
+            i++;
         }
 
-        return cur.index + 1;
+        return i + 1;
     }
 }
