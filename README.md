@@ -1,101 +1,61 @@
 # Java Linked List
 
-This project provides a basic implementation of a singly linked list in Java. It includes functionalities for appending, prepending, inserting, deleting, retrieving values, searching, and getting the size of the list.
-
-You can explore and test the functionality of this linked list implementation using the provided `Test.java` file. Alternatively, a pre-built `linkedlist-utils.jar` file is available in the [GitHub Releases](https://github.com/StefanRoets06/Java-Linked-List/releases) for easy integration into your Java projects.
-
-## Overview
-
-The linked list is implemented using two classes:
-
--   `ListItem`: Represents a single node in the linked list. Each node contains:
-    -   `data`: An `Object` to store the actual data.
-    -   `link`: A reference to the next `ListItem` in the list.
-    -   `index`: An integer representing the index of the item in the list.
--   `List`: Represents the linked list itself. It maintains a `headNode` which is a dummy node to simplify list operations.
+This project provides a basic implementation of a singly linked list in Java. It is designed to support generic types, making it flexible and versatile for different use cases. The linked list includes functionalities such as appending, prepending, inserting, deleting, retrieving values, searching, and determining the size of the list.
 
 ## Features
 
-The `List` class provides the following methods:
+- **Generic Support**: The linked list can store any data type, such as strings, integers, doubles, or custom objects.
+- **Full CRUD Operations**: Easily add, insert, delete, and retrieve elements in the list.
+- **Robust Error Handling**: Handles invalid indices and other edge cases gracefully.
+- **Lightweight and Extensible**: The implementation is compact, easy to understand, and can be extended for additional functionalities.
 
--   `appendToList(Object data)`: Adds a new element with the given `data` to the end of the list.
--   `prependToList(Object data)`: Adds a new element with the given `data` to the beginning of the list.
--   `insertInList(int index, Object data)`: Inserts a new element with the given `data` at the specified `index`.
--   `delete(int index)`: Removes the element at the specified `index` from the list.
--   `value(int index)`: Retrieves the data of the element at the specified `index`. Returns `null` if the index is out of bounds.
--   `searchList(Object data)`: Searches for the first occurrence of the given `data` and returns its index. Throws a `NoSuchElementException` if the data is not found.
--   `size()`: Returns the total number of elements in the list.
+## How to Use the Source Code
 
-## Getting Started
+1. Clone the repository to your local machine:
+   - Use the `git clone` command with the repository URL to download the project.
 
-**Option 1: Using the JAR file**
+2. Compile the source code:
+   - Navigate to the `src` directory and compile the Java files using a Java compiler (e.g., `javac`).
 
-1.  **Download `linkedlist-utils.jar`** from the [GitHub Releases](https://github.com/StefanRoets06/Java-Linked-List/releases).
-2.  **Include the JAR file** in your Java project's dependencies. This process varies depending on your build tool (e.g., Maven, Gradle) or IDE.
+3. Run the test class:
+   - The `Test` class demonstrates the linked list's functionalities. You can execute it to observe example operations such as adding, deleting, and searching elements.
 
-    * **For manual inclusion in an IDE (like IntelliJ IDEA or Eclipse):** Add the JAR file to your project's classpath.
+4. Modify as needed:
+   - You can create your own Java classes to utilize the `List` class. Import it into your project and use its methods to manage your data.
 
-3.  **Import the `List` class** in your Java code:
+## How to Use the Precompiled JAR Package
 
-    ```java
-    import utils.linkedlist.List;
-    ```
+If you prefer not to work with the source code directly, you can use the precompiled JAR package available in the releases section of this repository.
 
-4.  **Create an instance of the `List` class**:
+1. **Download the JAR**:
+   - Visit the [Releases](https://github.com/StefanRoets06/Java-Linked-List/releases) page of this repository and download the latest JAR file.
 
-    ```java
-    List myList = new List();
-    ```
+2. **Add the JAR to Your Project**:
+   - In your Java project, include the JAR file in your build path or classpath. This can be done through your IDE (e.g., IntelliJ IDEA, Eclipse) or by using a build tool like Maven or Gradle.
 
-5.  **Use the available methods** to manipulate the linked list as shown in the next section.
+3. **Import the Linked List Class**:
+   - Import the `List` class from the package `utils.linkedlist` into your Java code. Once imported, you can create and manipulate linked lists with the provided methods.
 
-**Option 2: Using the source code**
+4. **Using the Linked List**:
+   - Create an instance of the `List` class for your desired data type (e.g., `List<String>`, `List<Integer>`, or custom objects). Use methods like `appendToList`, `prependToList`, `insertInList`, and `delete` to manage your data.
 
-1.  **Clone the repository** or simply copy the `utils.linkedlist` package.
+5. **Run Your Application**:
+   - After integrating the JAR and using the linked list in your application, compile and run your program as usual. The linked list functionality will be seamlessly available.
 
-2.  **Ensure the `utils.linkedlist` package** is in your project's source directory.
+## Example Use Cases
 
-3.  **Import the `List` class**:
+The linked list can be used in various scenarios, such as:
 
-    ```java
-    import utils.linkedlist.List;
-    ```
-
-4.  **Create an instance of the `List` class**:
-
-    ```java
-    List myList = new List();
-    ```
-
-5.  **Use the available methods** to manipulate the linked list:
-
-    ```java
-    myList.appendToList("Apple");
-    myList.appendToList("Banana");
-    myList.prependToList("Mango");
-    myList.insertInList(1, "Orange");
-
-    System.out.println("Size of the list: " + myList.size()); // Output: 4
-    System.out.println("Value at index 2: " + myList.value(2)); // Output: Banana
-    System.out.println("Index of 'Orange': " + myList.searchList("Orange")); // Output: 1
-
-    myList.delete(0);
-    System.out.println("Size after deletion: " + myList.size()); // Output: 3
-    ```
-
-6.  **Testing (Optional):** If you chose Option 2, you can compile and run `Test.java` to see examples of how to use the `List` class and verify its functionality.
-
-    ```bash
-    javac Test.java
-    java Test
-    ```
+- Storing and processing user input in a dynamic list.
+- Managing a queue or stack-like structure where elements are frequently added or removed.
+- Keeping track of custom objects (e.g., tasks, contacts) in an application.
 
 ## Contributing
 
-Contributions to this project are welcome. Feel free to submit issues or pull requests for bug fixes or enhancements.
+Contributions are welcome! If you would like to enhance the linked list or fix any issues, feel free to fork the repository, make your changes, and submit a pull request.
 
 ## License
 
-MIT License
+This project is licensed under the MIT License. For more details, refer to the `LICENSE` file in the repository.
 
-Copyright (c) 2025 Stefan Roets
+© 2025 Stefan Roets. All rights reserved.
